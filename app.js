@@ -85,6 +85,6 @@ inputForm.addEventListener("submit", () => {
 renderTasks();
 
 // merke som fulført
-// vise fullførte
-
+// toggle vise fullførte
+// timestamp
 // dropdown sotering
