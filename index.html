@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>todo</title>
+  </head>
+  <body>
+    <header>
+      <h1>Todo list</h1>
+      <form id="input-form">
+        <input type="text" id="input-field" />
+        <input type="submit" id="submit-button" />
+      </form>
+      <div>
+        <div>
+          <input type="checkbox" id="show-finished" />
+          <label for="show-finished">Hide completed tasks </label>
+        </div>
+      </div>
+      <label for="sort">Sort by</label>
+      <select name="sort" id="sort">
+        <option value="Decending">Decending</option>
+        <option value="Acending">Acending</option>
+        <option value="Old">Old</option>
+        <option value="New">New</option>
+      </select>
+    </header>
+    <main id="list-container">
+      <!-- <div class="main-card">
+        <div class="container">
+          <input id="checkbox2" type="checkbox" />iscomplete
+        </div>
+        <p>test</p>
+        <div class="container">
+          <input type="button" value="Edit" /><input
+            type="button"
+            value="delete"
+          />
+        </div>
+      </div> -->
+    </main>
+  </body>
+</html>

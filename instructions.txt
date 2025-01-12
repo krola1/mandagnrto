@@ -1,0 +1,11 @@
+Vi koder ut en Gjøremål Liste med mulighet til å legge til, 
+slette og redigere gjøremål. 
+
+I tillegg legger vil til funksjonalitet som lar oss merke 
+gjøremål som fullførte, og lar oss velge om fullførte gjøremål 
+skal vises eller ikke. 
+
+Vi legger også til en dropdown meny som lar oss sortere listen etter timestamp 
+eller alfabetisk, både stigende og synkende. 
+
+All data lagres i localStorage og oppdateres når bruker gjør endringer.
