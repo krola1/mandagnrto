@@ -34,8 +34,8 @@ header {
 }
 
 .main-card{
-   display: flex;
-   flex-direction: column;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   border: 2px rgb(225, 234, 243) solid;
   border-radius: 10px;
@@ -49,4 +49,21 @@ header {
   font-size: 25px;
 
 
+}
+.container1{
+    font-size: large;
+}
+.container2{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  font-size: large;
+}
+.text{
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  border-color: #40707600;
+  border-radius: 10px;
+  background-color: whitesmoke;
 }

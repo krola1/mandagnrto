@@ -16,23 +16,30 @@ const cardDesign = (str) => {
   let mainCard = document.createElement("div");
   mainCard.className = "main-card";
   let container1 = document.createElement("div");
-  container1.className = "container";
+  container1.className = "container1";
+  container1.textContent = "Task Completed";
   let isComplete = document.createElement("input");
   isComplete.type = "checkbox";
   isComplete.id = "checkbox2";
-  let tasktext = document.createElement("p");
-  tasktext.textContent = str;
+  let tasktext = document.createElement("input");
+  tasktext.type = "text";
+  tasktext.value = str;
+  tasktext.id = str;
+  tasktext.className = "text";
+  tasktext.readOnly = true;
   let container2 = document.createElement("div");
-  container2.className = "container";
+  container2.className = "container2";
   let editButton = document.createElement("input");
   editButton.type = "button";
   editButton.value = "Edit";
-  editButton.id = "edit-button";
+  editButton.id = `${str}`;
+  editButton.className = "btn";
   let deleteButton = document.createElement("input");
   deleteButton.type = "button";
   deleteButton.value = "Delete";
   deleteButton.id = `${str}`;
-  container1.append(isComplete);
+  deleteButton.className = ".btn";
+  container1.prepend(isComplete);
   container2.append(editButton, deleteButton);
   mainCard.append(container1, tasktext, container2);
   listContainer.prepend(mainCard);
@@ -41,6 +48,19 @@ const cardDesign = (str) => {
     listArr.splice(listArr.indexOf(deleteButton.id, 1));
     localStorage.setItem("listArr", JSON.stringify(listArr));
     renderTasks();
+  });
+  // redigere
+  editButton.addEventListener("click", () => {
+    tasktext.readOnly = !tasktext.readOnly;
+    editButton.value = tasktext.readOnly ? "Edit" : "Save";
+    if (tasktext.readOnly) {
+      let temp = listArr.indexOf(editButton.id);
+      listArr[temp] = tasktext.value;
+      editButton.id = tasktext.value;
+      localStorage.setItem("listArr", JSON.stringify(listArr));
+    } else {
+      tasktext.focus();
+    }
   });
 };
 //main render
@@ -63,8 +83,6 @@ inputForm.addEventListener("submit", () => {
 });
 
 renderTasks();
-
-// redigere
 
 // merke som fulført
 // vise fullførte
