@@ -2,10 +2,10 @@ const inputField = document.querySelector("#input-field");
 const inputForm = document.querySelector("#input-form");
 const submitButton = document.querySelector("#submit-button");
 const listContainer = document.querySelector("#list-container");
-let listArr = [];
 
 // All data lagres i localStorage og oppdateres når bruker gjør endringer.
 const initializeList = () => {
+  const storedList = localStorage.getItem("listArr");
   let listArr = localStorage.getItem("listArr") ? JSON.parse(storedList) : [];
   localStorage.setItem("listArr", JSON.stringify(listArr));
 };
@@ -39,16 +39,19 @@ const createTaskCard = (task) => {
   editButton.type = "button";
   editButton.value = "Edit";
   editButton.className = "btn";
-
+  2;
   const deleteButton = document.createElement("input");
   deleteButton.type = "button";
   deleteButton.value = "Edit";
-  deleteButton.className("btn");
+  deleteButton.className = "btn";
 
   container1.prepend(isComplete);
   container2.append(deleteButton, editButton);
   mainCard.append(container1, taskText, container2);
   listContainer.append(mainCard);
+
+  deleteButton.addEventListener("click", () => deleteTask(task));
+  editButton.addEventListener("click", toggleEditTask(task));
 };
 
 const deleteTask = (task) => {
@@ -56,3 +59,32 @@ const deleteTask = (task) => {
   localStorage.setItem("listArr", JSON.stringify(listArr));
   renderTasks();
 };
+const toggleEditTask = (oldTask) => {
+  taskText.readOnly = !taskText.readOnly;
+  editButton.value = taskText.readOnly ? "Edit" : "Save";
+
+  if (taskText.readOnly) {
+    const taskIndex = listArr.indexOf(oldTask);
+    if (taskIndex !== -1) {
+      listArr[taskIndex] = taskText.value;
+      localStorage.setItem("listArr", JSON.stringify(listArr));
+    } else {
+      taskText.focus();
+    }
+  }
+};
+inputForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const newTask = inputField.value;
+  if (newTask) {
+    listArr.push(newTask);
+    localStorage.setItem("listArr", JSON.stringify(listArr));
+    renderTasks();
+    inputField.value = "";
+  } else {
+    alert("cannot submitt empty task");
+  }
+});
+
+initializeList();
+renderTasks();
