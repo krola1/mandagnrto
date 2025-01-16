@@ -3,17 +3,26 @@ const inputForm = document.querySelector("#input-form");
 const submitButton = document.querySelector("#submit-button");
 const listContainer = document.querySelector("#list-container");
 
+//nytt!
+const sort = document.querySelector("#sort");
+
+let listArr = [];
+
 // All data lagres i localStorage og oppdateres når bruker gjør endringer.
 const initializeList = () => {
-  const storedList = localStorage.getItem("listArr");
-  let listArr = localStorage.getItem("listArr") ? JSON.parse(storedList) : [];
-  localStorage.setItem("listArr", JSON.stringify(listArr));
+  if (localStorage.getItem("listArr")) {
+    listArr = JSON.parse(localStorage.getItem("listArr"));
+  } else {
+    listArr = [];
+  }
 };
 
 const renderTasks = () => {
+  while (listContainer.firstChild)
+    listContainer.removeChild(listContainer.firstChild);
+
   listArr.forEach((task) => createTaskCard(task));
 };
-
 const createTaskCard = (task) => {
   const mainCard = document.createElement("div");
   mainCard.className = "main-card";
@@ -39,10 +48,10 @@ const createTaskCard = (task) => {
   editButton.type = "button";
   editButton.value = "Edit";
   editButton.className = "btn";
-  2;
+
   const deleteButton = document.createElement("input");
   deleteButton.type = "button";
-  deleteButton.value = "Edit";
+  deleteButton.value = "Delete";
   deleteButton.className = "btn";
 
   container1.prepend(isComplete);
@@ -59,7 +68,8 @@ const deleteTask = (task) => {
   localStorage.setItem("listArr", JSON.stringify(listArr));
   renderTasks();
 };
-const toggleEditTask = (oldTask) => {
+
+const toggleEditTask = (taskText, editButton, oldTask) => {
   taskText.readOnly = !taskText.readOnly;
   editButton.value = taskText.readOnly ? "Edit" : "Save";
 
@@ -68,13 +78,12 @@ const toggleEditTask = (oldTask) => {
     if (taskIndex !== -1) {
       listArr[taskIndex] = taskText.value;
       localStorage.setItem("listArr", JSON.stringify(listArr));
-    } else {
-      taskText.focus();
     }
+  } else {
+    taskText.focus();
   }
 };
 inputForm.addEventListener("submit", (event) => {
-  event.preventDefault();
   const newTask = inputField.value;
   if (newTask) {
     listArr.push(newTask);
